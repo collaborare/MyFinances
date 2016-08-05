@@ -1,0 +1,6 @@
+Transaction
+  fromAccount	Text
+  toAccount	Text
+  reason	Text
+  amount	Int
+  deriving Show Generic
