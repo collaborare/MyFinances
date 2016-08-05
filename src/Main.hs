@@ -2,22 +2,20 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
 import Protolude
 import Servant
 
-import GHC.Generics
 import Data.Aeson
-import Data.String
 
-import Network.Wai
 import Network.Wai.Handler.Warp
 
 data Transaction = Transaction
-                 { fromAccount :: String
-                 , toAccount   :: String
-                 , reason      :: String
+                 { fromAccount :: Text
+                 , toAccount   :: Text
+                 , reason      :: Text
                  , amount      :: Integer
                  } deriving (Show, Generic)
 instance ToJSON Transaction
