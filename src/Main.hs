@@ -12,16 +12,12 @@ import Data.Aeson
 
 import Network.Wai.Handler.Warp
 
--- internal imports
-
-import Models
-
--- data Transaction = Transaction
---                  { fromAccount :: Text
---                  , toAccount   :: Text
---                  , reason      :: Text
---                  , amount      :: Integer
---                  } deriving (Show, Generic)
+data Transaction = Transaction
+                 { fromAccount :: Text
+                 , toAccount   :: Text
+                 , reason      :: Text
+                 , amount      :: Integer
+                 } deriving (Show, Generic)
 instance ToJSON Transaction
 instance FromJSON Transaction
 
