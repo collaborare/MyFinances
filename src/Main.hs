@@ -1,4 +1,3 @@
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE TypeFamilies #-}
@@ -8,23 +7,15 @@ module Main where
 import Protolude
 import Servant
 
-import Data.Aeson
-
 import Network.Wai.Handler.Warp
 
-data Transaction = Transaction
-                 { fromAccount :: Text
-                 , toAccount   :: Text
-                 , reason      :: Text
-                 , amount      :: Integer
-                 } deriving (Show, Generic)
-instance ToJSON Transaction
-instance FromJSON Transaction
+import Types
 
-type FinanceAPI = "transaction" :> Capture "id" Integer :> Get '[JSON] Transaction
+type FinanceAPI = "transaction" :> QueryParam "id" Integer :> Get '[JSON] Transaction
 
 server :: Server FinanceAPI
-server = return . return $ Transaction "income" "grocery" "Bought food" 2036
+server = return getTransaction 
+  where getTransaction = return $ Transaction "income" "grocery" "Bought food" 2036
 
 app :: Application
 app = serve (Proxy :: Proxy FinanceAPI) server
